@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+      <div class="h2">register</div>
+      <form #userlogin="ngForm" (ngSubmit)="register(userlogin.value)">
+        <div class="form-group">
+          <label>Email username</label>
+          <input
+            type="text"
+            class="form-control"
+            aria-describedby="emailHelp"
+            placeholder="Enter username"
+            ngModel
+            name="username"
+          />
+        </div>
+        <div class="form-group">
+          <label>Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            ngModel
+            name="email"
+          />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            name="password"
+            ngModel
+          />
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">register</button>
+      </form>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-5" *ngIf="isRegistered">
+    <div class="col-md-4">
+      <div class="h2">Complete 2 step verification</div>
+      <img [src]="imgURL" alt="" srcset="" />
+      <label for="exampleInputEmail1">Enter Authentication code</label>
+      <input
+        type="number"
+        class="form-control"
+        aria-describedby="emailHelp"
+        placeholder="Enter code"
+        [(ngModel)]="token"
+      />
+      <button
+        type="submit"
+        class="btn btn-primary mt-3"
+        (click)="validateCode()"
+      >
+        Verify
+      </button>
+    </div>
+  </div>
+</div>
