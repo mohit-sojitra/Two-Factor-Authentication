@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService } from "../auth.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent {
   isLoggedIn = false;
   token: number = 0;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private router:Router) {}
 
   login(value: any) {
     this.authService.login(value.email, value.password).subscribe(
@@ -22,7 +23,10 @@ export class LoginComponent {
 
   validateCode() {
     this.authService.validateCode(this.token).subscribe(
-      (res:any) => alert(res.message),
+      (res: any) => {
+        alert(res.message);
+        this.router.navigateByUrl('home');
+      },
       (err) => console.log(err)
     );
   }
